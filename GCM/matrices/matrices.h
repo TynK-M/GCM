@@ -10,7 +10,25 @@
 
 #define GCM_MATRICES
 
+#include <stdio.h>
 
+/**
+ * wit, short for "What Is That"
+ * When the function is called, it prints in the terminal a small description about
+ * the matrices.
+ */
+void wit(){
+    printf("A matrix is a rectangular array of numbers or other mathematical objects. \n");
+    printf("Those elements are arranged in rows and columns, without a constrain regarding the difference of length. \n");
+    printf("E.g.: it can have 5 rows and 2 columns \n");
+    printf("A matrix with the same number of rows and columns is called \"Square matrix\".\n");
+    printf("E.g. of a matrix: \n");
+    printf("%c         %c\n", 218, 191);
+    printf("| 1  2  3 |\n");
+    printf("| 6  5  4 |\n");
+    printf("%c         %c\n", 192, 217);
+
+}
 
 #endif // GCM_MATRICES
 
