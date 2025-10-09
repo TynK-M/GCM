@@ -1,2 +1,5 @@
 # Test foulder
 test
+
+# VS-Code specific files
+.vscode
