@@ -41,6 +41,45 @@ void wit() {
 }
 
 /**
+ * Function to allocate the memory for a Matrix.
+ * 
+ * Remember to free the allocated memory when the Matrix is no more used with the function `free_matrix(Matrix matrix)`.
+ *
+ * Params:
+ * - rows: the number of rows of the wanted Matrix
+ * - cols: the number of columns of the wanted Matrix
+ *
+ * Return:
+ * A Matrix with the memory for `data` allocated.
+ */
+Matrix create_matrix(size_t rows, size_t cols) {
+    Matrix matrix;
+    
+    matrix.rows = rows;
+    matrix.cols = cols;
+    
+    matrix.data = malloc(rows * sizeof(float *));
+    for (int i = 0; i < rows; i++) {
+        matrix.data[i] = malloc(cols * sizeof(float));
+    }
+
+    return matrix;
+}
+
+/**
+ * Function to free the allocated memory of a Matrix.
+ *
+ * Params:
+ * - matrix: the Matrix that needs to free the allocated memory
+ */
+void free_matrix(Matrix matrix) {
+    for (size_t i = 0; i < matrix.rows; i++) {
+        free(matrix.data[i]);
+    }
+    free(matrix.data);
+}
+
+/**
  * Matrix pretty printer.
  * 
  * Function that pretty print a given Matrix.
@@ -73,30 +112,6 @@ void mpprint(Matrix matrix, size_t decimals_number) {
         printf("\t");
     }
     printf("%c\n", bottom_right);
-}
-
-/**
- * Function to allocate the memory for a matrix.
- *
- * Params:
- * - rows: the number of rows of the wanted Matrix
- * - cols: the number of columns of the wanted Matrix
- *
- * Return:
- * A Matrix with the memory for `data` allocated.
- */
-Matrix create_matrix(size_t rows, size_t cols) {
-    Matrix matrix;
-    
-    matrix.rows = rows;
-    matrix.cols = cols;
-    
-    matrix.data = malloc(rows * sizeof(float *));
-    for (int i = 0; i < rows; i++) {
-        matrix.data[i] = malloc(cols * sizeof(float));
-    }
-
-    return matrix;
 }
 
 /**
