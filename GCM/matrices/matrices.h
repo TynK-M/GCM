@@ -41,6 +41,41 @@ void wit() {
 }
 
 /**
+ * Matrix pretty printer.
+ * 
+ * Function that pretty print a given Matrix.
+ * 
+ * Param:
+ * - matrix: the Matrix to pretty print
+ */
+void mpprint(Matrix matrix, size_t decimals_number) {
+    const char top_left = 218;   // ┌
+    const char top_right = 191;  // ┐
+    const char bottom_left = 192; // └
+    const char bottom_right = 217; // ┘
+    
+    printf("%c", top_left);
+    for (size_t t = 0; t < matrix.cols + 1; t++) {
+        printf("\t");
+    }
+    printf("%c\n", top_right);
+
+    for(size_t i = 0; i < matrix.rows; i++) {
+        printf("|\t");
+        for (size_t j = 0; j < matrix.cols; j++) {
+            printf("%.*f\t", decimals_number, matrix.data[i][j]);
+        }
+        printf("|\n");
+    }
+
+    printf("%c", bottom_left);
+    for (size_t t = 0; t < matrix.cols + 1; t++) {
+        printf("\t");
+    }
+    printf("%c\n", bottom_right);
+}
+
+/**
  * Function to allocate the memory for a matrix.
  *
  * Params:
