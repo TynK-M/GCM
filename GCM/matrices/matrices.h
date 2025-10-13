@@ -89,7 +89,7 @@ void free_matrix(Matrix matrix) {
  * Return:
  * A Matrix representing the sum of the two passed matrices.
  */
-Matrix madd(Matrix a, Matrix b) {
+Matrix matrix_addition(Matrix a, Matrix b) {
     if (a.rows != b.rows || a.cols != b.cols) {
         fprintf(stderr, "MismatchMatrixDimensionError: Matrix dimensions must match for addition. \n");
         fprintf(stderr, "a is %d%d, B is %d%d\n", a.rows, a.cols, b.rows, b.cols);
@@ -117,7 +117,7 @@ Matrix madd(Matrix a, Matrix b) {
  * Return:
  * A Matrix representing the subtraction of the two passed matrices.
  */
-Matrix msub(Matrix a, Matrix b) {
+Matrix matrix_subtraction(Matrix a, Matrix b) {
     if (a.rows != b.rows || a.cols != b.cols) {
         fprintf(stderr, "MismatchMatrixDimensionError: Matrix dimensions must match for subtraction. \n");
         fprintf(stderr, "a is %d%d, B is %d%d\n", a.rows, a.cols, b.rows, b.cols);
@@ -150,7 +150,7 @@ Matrix msub(Matrix a, Matrix b) {
  * - matrix: the Matrix to pretty print
  * - decimals_numbers: the number of decimals to show
  */
-void mpprint(Matrix matrix, size_t decimals_number) {
+void matrix_pretty_print(Matrix matrix, size_t decimals_number) {
     const char top_left = 218;      // ┌
     const char top_right = 191;     // ┐
     const char bottom_left = 192;   // └
@@ -207,7 +207,7 @@ void wit() {
     m.data[0][0] = 1; m.data[0][1] = 2; m.data[0][2] = 3;
     m.data[1][0] = 6; m.data[1][1] = 5; m.data[1][2] = 4;
 
-    mpprint(m, 0);
+    matrix_pretty_print(m, 0);
 
     free_matrix(m);
 
@@ -215,6 +215,39 @@ void wit() {
 
     printf("For the purposes of the library it's important to note that the rows are expressed as 'm' while the columns as 'n'.\nSo a matrix with 'm' rows and 'n' columns is called an 'm x n' matrix(or m-by-n matrix), where 'm' and 'n' are called the dimensions.\n");
 }
+
+/*************************************************
+ *                                               *
+ *            SHORT FUNCTION NAMES               *
+ *                                               *
+ *************************************************/
+#ifdef GCM_SHORT_FN
+
+// Struct definitions
+
+#define M Matrix
+
+// Matrix lifecycle
+
+#define cm create_matrix
+#define mcreate create_matrix
+
+#define fm free_matrix
+#define mfree free_matrix
+
+// Operations
+
+#define ma matrix_addition
+#define madd matrix_addition
+
+#define ms matrix_subtraction
+#define msub matrix_subtraction
+
+// Utility functions
+
+#define mpprint matrix_pretty_print
+
+#endif // GCM_SHORT_FN
 
 #endif // GCM_MATRICES
 
