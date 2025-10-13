@@ -247,6 +247,13 @@ void wit() {
 
 #define mpprint matrix_pretty_print
 
+// Info functions
+
+/**
+ * The function wit it is already short, so it doesn't need a shorter version.
+ * If it should get the full what_is_that(), please leave a feedback in the issue section.
+ */
+
 #endif // GCM_SHORT_FN
 
 #endif // GCM_MATRICES
