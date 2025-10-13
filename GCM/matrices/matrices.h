@@ -107,6 +107,34 @@ Matrix madd(Matrix a, Matrix b) {
     return result;
 }
 
+/**
+ * Function to subtract two matrices.
+ *
+ * Params:
+ * - a: the first Matrix.
+ * - b: the second Matrix.
+ *
+ * Return:
+ * A Matrix representing the subtraction of the two passed matrices.
+ */
+Matrix msub(Matrix a, Matrix b) {
+    if (a.rows != b.rows || a.cols != b.cols) {
+        fprintf(stderr, "MismatchMatrixDimensionError: Matrix dimensions must match for subtraction. \n");
+        fprintf(stderr, "a is %d%d, B is %d%d\n", a.rows, a.cols, b.rows, b.cols);
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix result = create_matrix(a.rows, a.cols);
+
+    for (size_t i = 0; i < a.rows; i++) {
+        for (size_t j = 0; j < a.cols; j++) {
+            result.data[i][j] = a.data[i][j] - b.data[i][j];
+        }
+    }
+
+    return result;
+}
+
 /*************************************************
  *                                               *
  *              UTILITY FUNCTIONS                *
