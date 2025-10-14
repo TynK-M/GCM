@@ -4,6 +4,10 @@
  *
  * If someone is deciding for a random reason to use it, and founds a problem.
  * Please open an issue.
+ * 
+ * Interesting sources for studying:
+ * - Books:
+ *  - The Theory Of Matrices By F.R. Gantmacher Volume One
  */
 
 #ifndef GCM_MATRICES
