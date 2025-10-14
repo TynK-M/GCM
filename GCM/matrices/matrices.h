@@ -89,24 +89,24 @@ void free_matrix(Matrix matrix) {
  * Function to add two matrices.
  *
  * Params:
- * - a: the first Matrix.
- * - b: the second Matrix.
+ * - A: the first Matrix.
+ * - B: the second Matrix.
  *
  * Return:
- * A Matrix representing the sum of the two passed matrices.
+ * A Matrix representing the sum of the two passed matrices: A + B.
  */
-Matrix matrix_addition(Matrix a, Matrix b) {
-    if (a.rows != b.rows || a.cols != b.cols) {
+Matrix matrix_addition(Matrix A, Matrix B) {
+    if (A.rows != B.rows || A.cols != B.cols) {
         fprintf(stderr, "MismatchMatrixDimensionError: Matrix dimensions must match for addition. \n");
-        fprintf(stderr, "a is %d%d, B is %d%d\n", a.rows, a.cols, b.rows, b.cols);
+        fprintf(stderr, "A is %d%d, B is %d%d\n", A.rows, A.cols, B.rows, B.cols);
         exit(EXIT_FAILURE);
     }
 
-    Matrix result = create_matrix(a.rows, a.cols);
+    Matrix result = create_matrix(A.rows, A.cols);
 
-    for (size_t i = 0; i < a.rows; i++) {
-        for (size_t j = 0; j < a.cols; j++) {
-            result.data[i][j] = a.data[i][j] + b.data[i][j];
+    for (size_t i = 0; i < A.rows; i++) {
+        for (size_t j = 0; j < A.cols; j++) {
+            result.data[i][j] = A.data[i][j] + B.data[i][j];
         }
     }
 
@@ -117,24 +117,24 @@ Matrix matrix_addition(Matrix a, Matrix b) {
  * Function to subtract two matrices.
  *
  * Params:
- * - a: the first Matrix.
- * - b: the second Matrix.
+ * - A: the first Matrix.
+ * - B: the second Matrix.
  *
  * Return:
- * A Matrix representing the subtraction of the two passed matrices.
+ * A Matrix representing the subtraction of the two passed matrices: A - B.
  */
-Matrix matrix_subtraction(Matrix a, Matrix b) {
-    if (a.rows != b.rows || a.cols != b.cols) {
+Matrix matrix_subtraction(Matrix A, Matrix B) {
+    if (A.rows != B.rows || A.cols != B.cols) {
         fprintf(stderr, "MismatchMatrixDimensionError: Matrix dimensions must match for subtraction. \n");
-        fprintf(stderr, "a is %d%d, B is %d%d\n", a.rows, a.cols, b.rows, b.cols);
+        fprintf(stderr, "A is %d%d, B is %d%d\n", A.rows, A.cols, B.rows, B.cols);
         exit(EXIT_FAILURE);
     }
 
-    Matrix result = create_matrix(a.rows, a.cols);
+    Matrix result = create_matrix(A.rows, A.cols);
 
-    for (size_t i = 0; i < a.rows; i++) {
-        for (size_t j = 0; j < a.cols; j++) {
-            result.data[i][j] = a.data[i][j] - b.data[i][j];
+    for (size_t i = 0; i < A.rows; i++) {
+        for (size_t j = 0; j < A.cols; j++) {
+            result.data[i][j] = A.data[i][j] - B.data[i][j];
         }
     }
 
@@ -149,7 +149,7 @@ Matrix matrix_subtraction(Matrix a, Matrix b) {
  * - scalar: a single number used to scale the values in the matrix.
  *
  * Return:
- * A Matrix representing the passed Matrix scaled by the scalar.
+ * A Matrix representing the passed Matrix scaled by the scalar: matrix * scalar.
  */
 Matrix matrix_scalar_multiplication(Matrix matrix, double scalar) {
     Matrix result = create_matrix(matrix.rows, matrix.cols);
@@ -160,6 +160,43 @@ Matrix matrix_scalar_multiplication(Matrix matrix, double scalar) {
         }
     }
     
+
+    return result;
+}
+
+/**
+ * Function to do the dot product of two matrices.
+ *
+ * Params:
+ * - A: the first Matrix.
+ * - B: the second Matrix.
+ * 
+ * Note, following the rules of the dot product of two matrices with the first dimension being `m x n` and the second dimension being `n x p`:
+ * - a.cols and b.rows should be the same number
+ * - the resulting Matrix will have the dimension `m x p`
+ *
+ * Return:
+ * A Matrix of dimensions `m x p`(A.rows, B.cols) with the result of the dot product: A x B.
+ */
+Matrix matrix_dot_product(Matrix A, Matrix B) {
+    if(A.cols != B.rows) {
+        fprintf(stderr, "MismatchMatrixDimensionError: When doing the dot product the number of columns of the first Matrix should match the number of rows of the second Matrix. \n");
+        fprintf(stderr, "A columns number is %d, B rows number is %d\n", A.cols, B.rows);
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix result = create_matrix(A.rows, B.cols);
+
+    for (size_t i = 0; i < result.rows; i++) {
+        for (size_t j = 0; j < result.cols; j++) {
+            result.data[i][j] = 0;
+
+            for (size_t k = 0; k < A.cols; k++)
+            {
+                result.data[i][j] += A.data[i][k] * B.data[k][j] ;
+            }
+        }
+    }
 
     return result;
 }
@@ -276,6 +313,10 @@ void wit() {
 #define mscale matrix_scalar_multiplication
 #define mscalmult matrix_scalar_multiplication
 #define matrix_scale matrix_scalar_multiplication
+
+#define mdp matrix_dot_product
+#define mprod matrix_dot_product
+#define mdotprod matrix_dot_product
 
 // Utility functions
 
