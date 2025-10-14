@@ -8,6 +8,8 @@
  * Interesting sources for studying:
  * - Books:
  *  - The Theory Of Matrices By F.R. Gantmacher Volume One
+ * - Sites:
+ *  - https://www.mathsisfun.com/algebra/matrix-multiplying.html
  */
 
 #ifndef GCM_MATRICES
@@ -139,6 +141,29 @@ Matrix matrix_subtraction(Matrix a, Matrix b) {
     return result;
 }
 
+/**
+ * Function to scale (scalar multiplication) a Matrix.
+ *
+ * Params:
+ * - matrix: the Matrix to scale.
+ * - scalar: a single number used to scale the values in the matrix.
+ *
+ * Return:
+ * A Matrix representing the passed Matrix scaled by the scalar.
+ */
+Matrix matrix_scalar_multiplication(Matrix matrix, double scalar) {
+    Matrix result = create_matrix(matrix.rows, matrix.cols);
+
+    for (size_t i = 0; i < matrix.rows; i++) {
+        for (size_t j = 0; j < matrix.cols; j++) {
+            result.data[i][j] = matrix.data[i][j] * scalar;
+        }
+    }
+    
+
+    return result;
+}
+
 /*************************************************
  *                                               *
  *              UTILITY FUNCTIONS                *
@@ -246,6 +271,9 @@ void wit() {
 
 #define ms matrix_subtraction
 #define msub matrix_subtraction
+
+#define msm matrix_scalar_multiplication
+#define mscalmult matrix_scalar_multiplication
 
 // Utility functions
 
