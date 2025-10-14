@@ -273,7 +273,9 @@ void wit() {
 #define msub matrix_subtraction
 
 #define msm matrix_scalar_multiplication
+#define mscale matrix_scalar_multiplication
 #define mscalmult matrix_scalar_multiplication
+#define matrix_scale matrix_scalar_multiplication
 
 // Utility functions
 
