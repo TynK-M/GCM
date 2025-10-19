@@ -10,6 +10,7 @@
  *  - The Theory Of Matrices By F.R. Gantmacher Volume One
  * - Sites:
  *  - https://www.mathsisfun.com/algebra/matrix-multiplying.html
+ *  - https://www.mathsisfun.com/algebra/matrix-determinant.html
  */
 
 #ifndef GCM_MATRICES
@@ -77,6 +78,32 @@ void free_matrix(Matrix matrix) {
         free(matrix.data[i]);
     }
     free(matrix.data);
+}
+
+/**
+ * Function to create an identity Matrix I.
+ * 
+ * Create an identity Matrix, a Matrix that contains all zeros, except for the elements a_ij where i == j.
+ *
+ * Params:
+ * - dimension: the dimension of the identity Matrix
+ * 
+ * Return:
+ * The identity Matrix with the passed dimension.
+ */
+Matrix create_identity_matrix(size_t dimension) {
+    Matrix I = create_matrix(dimension, dimension);
+
+    for (size_t i = 0; i < dimension; i++) {
+        I.data[i][i] = 1;
+        for (size_t j = 0; j < dimension; j++) {
+            if (i != j) {
+                I.data[i][j] = 0;
+            }
+        }
+    }
+    
+    return I;
 }
 
 /*************************************************
@@ -151,7 +178,7 @@ Matrix matrix_subtraction(Matrix A, Matrix B) {
  * Return:
  * A Matrix representing the passed Matrix scaled by the scalar: matrix * scalar.
  */
-Matrix matrix_scalar_multiplication(Matrix matrix, double scalar) {
+Matrix matrix_scalar_multiplication(Matrix matrix, float scalar) {
     Matrix result = create_matrix(matrix.rows, matrix.cols);
 
     for (size_t i = 0; i < matrix.rows; i++) {
@@ -200,6 +227,44 @@ Matrix matrix_dot_product(Matrix A, Matrix B) {
 
     return result;
 }
+
+/*************************************************
+ *                                               *
+ *         DECOMPOSITIONS & PROPERTIES           *
+ *                                               *
+ *************************************************/
+
+/**
+ * Function for Laplace expansion, compute the determinant of an n × n Matrix by expanding it along a row (or column).
+ * 
+ * det(𝐴)= ∑[j = 1][n] 𝑎_𝑖𝑗⋅𝐶_𝑖𝑗
+ * 
+ * Params:
+ * - matrix: the Matrix which determinat needs to be calculated
+ * 
+ * Note that the determinant can be found only for squared matrices.
+ * 
+ * Return:
+ * The scalar value representing the determinant of the Matrix.
+ */ 
+float laplace_expansion(Matrix matrix) {
+    if(matrix.rows != matrix.cols) {
+        fprintf(stderr, "MismatchMatrixDimensionError: When calculing the determinant the matrix should be square (rows and columns should match). \n");
+        fprintf(stderr, "Matrix dimensions: %i x %i", matrix.rows, matrix.cols);
+        exit(EXIT_FAILURE);
+    }
+
+    float result;
+
+    // Expanding along row i
+    for (size_t j = 0; j < matrix.rows; j++)
+    {
+
+    }
+    
+
+    return result;
+} 
 
 /*************************************************
  *                                               *
@@ -299,7 +364,10 @@ void wit() {
 #define mcreate create_matrix
 
 #define fm free_matrix
-#define mfree free_matrix
+#define mfree 
+
+#define cim create_identity_matrix
+#define imcreate create_identity_matrix
 
 // Operations
 
@@ -317,6 +385,11 @@ void wit() {
 #define mdp matrix_dot_product
 #define mprod matrix_dot_product
 #define mdotprod matrix_dot_product
+
+// Decompositions and properties
+
+#define le laplace_expansion
+#define ldet laplace_expansion
 
 // Utility functions
 
